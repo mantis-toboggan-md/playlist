@@ -8,15 +8,61 @@ body {
   height: 100vh; }
 
 #albumPreviews {
-  overflow: hidden;
+  justify-content: space-around;
+  height: 100%;
+  padding-top: 1.5%; }
+  #albumPreviews img {
+    padding: 0.5%;
+    max-height: 300px;
+    flex-grow: 1; }
+
+.row-center {
+  height: 100%; }
+
+.col-center {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center; }
-  #albumPreviews img {
-    padding: 10px; }
+  align-items: center;
+  justify-content: center; }
 
-.albumArt {
-  max-width: 300px;
-  max-height: 300px; }
+.navbar-fixed-bottom {
+  display: flex;
+  justify-content: center; }
+
+.container-fluid {
+  max-width: 1000px; }
+
+#header {
+  min-height: 10%;
+  display: flex;
+  justify-content: center; }
+
+#albumShelf {
+  margin-left: 0;
+  margin-right: 0;
+  display: flex;
+  justify-content: space-between;
+  max-height: 20%;
+  overflow: auto; }
+  #albumShelf img {
+    max-width: 150px;
+    max-height: 150px;
+    padding: 0;
+    flex-grow: 1; }
+
+.selectedAlbumCover {
+  max-height: 150px; }
+
+.col-sm-4 {
+  height: 100%; }
+
+#allTracks, #chosenTracks {
+  border: 1px solid black;
+  min-height: 95%; }
+
+#trackBins {
+  margin-top: 5%;
+  height: 35%; }
 
 /*# sourceMappingURL=style.css.map */

@@ -18,17 +18,16 @@ fetch("https://lit-fortress-6467.herokuapp.com/object")
       var albumArr = data.results
       var albumPreviewsEl = document.querySelector("#albumPreviews")
       //run for loop 3 times to get 3 image elements
-      for(var i = 0; i < 4; i++){
+      for(var i = 0; i < 3; i++){
         var imgEl = document.createElement("img")
         //pick album using indexes from randomIndexArr
         imgEl.setAttribute("src", `images/${albumArr[randomIndexArr[i]].cover_art}`)
         imgEl.setAttribute("id", albumArr[randomIndexArr[i]].artist)
-        imgEl.classList.add("albumArt")
         albumPreviewsEl.appendChild(imgEl)
       }
 
 
-
+      console.log(data.results)
 
 
 

@@ -10,22 +10,40 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
   <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!-- end Bootstrap stuff -->
 
-  <!-- <script src = "script.js" defer></script> -->
+  <script src = "playlistScript.js" defer></script>
   <link rel="stylesheet" href="style/css/style.css">
   </head>
   <body>
-    <div class = "container" id=mainContent>
-      <div class = "row">
+    <div class = "container-fluid" id=mainContent>
+      <div class = "row" id ="header">
         <h2>pick an album to add its tracks to the bin</h2>
       </div>
-      <div class = "row" id = "ablumShelf">
+      <div class = "row" id = "albumShelf">
         <!-- put album art here -->
       </div>
-      <div class = "row" id="choiceBin">
-        <!-- list tracks here -->
+      <div class = "row" id = "trackBins">
+        <div class = "col-sm-3">
+          <p>Add tracks from:</p>
+          <div id="selectedAlbumInfo">
+            Ghost in the Machine<br>
+            The Police
+            <img src = "images/ghost_in_the_machine.jpg" class = "selectedAlbumCover">
+          </div>
+        </div>
+        <div class = "col-sm-4">
+          available tracks:
+          <section id = "allTracks"></section>
+        </div>
+        <div class = "col-sm-4">
+          playlist:
+          <section id = "chosenTracks"></section>
+          runtime:
+        </div>
       </div>
       <div class = "row" id="inputArea">
         <button class = "btn btn-primary" name="clearTracksBtn">clear tracks</button>
