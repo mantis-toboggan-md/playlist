@@ -61,14 +61,34 @@ body{
 .selectedAlbumCover{
   max-height: 150px;
 }
+
+//columns each containing bin and desc.
 .col-sm-4{
   height: 100%;
 }
+
+//bin elements
 #allTracks, #chosenTracks{
   border: 1px solid black;
   min-height: 95%;
 }
+
+#allTracks li:hover{
+  color: red;
+}
+
+//row containing both bins and album preview info
 #trackBins{
   margin-top: 5%;
   height: 35%;
+}
+
+//row containing submittal/clear buttons
+#inputArea{
+  margin-top: 5%;
+  display: flex;
+  justify-content: flex-end;
+  & button{
+    margin-right: 10%;
+  }
 }

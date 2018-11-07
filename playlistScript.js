@@ -1,5 +1,7 @@
 var albumShelfEl = document.querySelector("#albumShelf")
 var allTracksEl = document.querySelector("#allTracks")
+var allTracksListEl = document.querySelector("#allTracksList")
+var chosenTracksListEl = document.querySelector("#chosenTrackList")
 
 var adeleTracks = [
   {name: "Rolling in the Deep",
@@ -114,6 +116,21 @@ var mjTracks = [
   length: "5:00"},
 ]
 
+/* format of playlist willbe:
+[
+  {album:
+  track:
+  length:},
+  {album:
+  track:
+  length:
+  }
+  ..etc
+]
+*/
+var playlist = []
+//runtime in seconds
+var totalRuntime = 0;
 
 //get array of album objects
 fetch("https://lit-fortress-6467.herokuapp.com/object")
@@ -145,26 +162,59 @@ fetch("https://lit-fortress-6467.herokuapp.com/object")
       albumEl.setAttribute("id", albumArr[i].title)
       albumShelfEl.appendChild(albumEl)
 
-      //add event listeners for each album object
+      //add event listeners for each album cover
       albumEl.addEventListener("click", function(){
+        //if there's already something in the bin, remove it
+        while(allTracksListEl.childNodes[0]){
+          allTracksListEl.removeChild(allTracksListEl.childNodes[0])
+        }
         //get associated object
         var albumName = this.id
         var albumObj =  albumArr.find(function(obj){
            return obj.title == albumName
         })
+
+        //change left-hand album info area and update runtime
         document.querySelector("#selectedAlbumInfo").innerHTML = `
           ${albumObj.title}<br>
           ${albumObj.artist}<br>
           <img src = "images/${albumObj.cover_art}" class = "selectedAlbumCover">
         `
-          var trackList = document.createElement("ol")
+          //make a list element to store tracks in album bin
+          allTrackListEl = document.createElement("ol")
           for(var i = 0; i < albumObj.tracks.length; i++){
-            var indivTrack = document.createElement("li")
-            indivTrack.innerHTML = `${albumObj.tracks[i].name}: ${albumObj.tracks[i].length}`
-            trackList.appendChild(indivTrack)
-          }
-          allTracksEl.appendChild(trackList)
+            //makeli's of tracks and runtime
+            var indivTrackEl = document.createElement("li")
+            //attach the length of song as class to use for  total runtime later
+            indivTrackEl.classList.add(`${albumObj.tracks[i].length}`)
+            indivTrackEl.innerHTML = `${albumObj.tracks[i].name}: ${albumObj.tracks[i].length}`
 
+            //add individual li's to ol of album tracks
+            allTracksListEl.appendChild(indivTrackEl)
+
+            //add event listener for each track to add it to other bin when user selects it
+            indivTrackEl.addEventListener("click", function(){
+              var chosenIndivTrackEl = this .cloneNode(true)
+              chosenTracksListEl.appendChild(chosenIndivTrackEl)
+              //get runtime of track from class, convert to seconds, add to total runtime
+              var runtime = this.classList[0]
+              //runtime is in format mm:ss convert to seconds and add to totalRuntime
+              var mins = runtime.slice(0, runtime.indexOf(":"))
+              var secs = runtime.slice(runtime.indexOf(":")+1, runtime.length)
+              totalRuntime += parseInt(mins*60)+parseInt(secs)
+
+              //convert total to mm:ss and change totalruntime in html to match
+              var totalRuntimeMin = `${Math.floor(totalRuntime/60)}:${(totalRuntime%60)}`
+              document.querySelector("#runtimeSpan").innerHTML = `runtime: ${totalRuntimeMin}`
+
+            })
+
+
+
+
+
+
+          }
       })
     }
   })

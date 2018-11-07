@@ -61,8 +61,18 @@ body {
   border: 1px solid black;
   min-height: 95%; }
 
+#allTracks li:hover {
+  color: red; }
+
 #trackBins {
   margin-top: 5%;
   height: 35%; }
+
+#inputArea {
+  margin-top: 5%;
+  display: flex;
+  justify-content: flex-end; }
+  #inputArea button {
+    margin-right: 10%; }
 
 /*# sourceMappingURL=style.css.map */
