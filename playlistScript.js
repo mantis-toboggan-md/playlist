@@ -154,9 +154,10 @@ fetch("https://lit-fortress-6467.herokuapp.com/object")
               albumArr[i].tracks = adeleTracks
       }
       //make elements for each album cover
-      var albumEl = document.createElement("img")
-      albumEl.setAttribute("src", `images/${albumArr[i].cover_art}`)
-      albumEl.setAttribute("alt", `album art for ${albumArr[i].title}`)
+      var albumEl = document.createElement("div")
+      albumEl.innerHTML = `<img src = "images/${albumArr[i].cover_art}" alt = "album art for ${albumArr[i].title}">`
+      // albumEl.setAttribute("src", `images/${albumArr[i].cover_art}`)
+      // albumEl.setAttribute("alt", `album art for ${albumArr[i].title}`)
       albumEl.setAttribute("id", albumArr[i].title)
       albumShelfEl.appendChild(albumEl)
 

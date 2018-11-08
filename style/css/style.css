@@ -33,9 +33,6 @@ body {
   display: flex;
   justify-content: center; }
 
-.container-fluid {
-  max-width: 1000px; }
-
 #header {
   min-height: 10%;
   display: flex;
@@ -53,19 +50,21 @@ body {
   margin-left: 0;
   margin-right: 0;
   display: flex;
-  justify-content: space-between;
-  max-height: 20%;
-  overflow: auto; }
+  justify-content: center;
+  height: 25%;
+  overflow: hidden; }
   #albumShelf img {
-    max-width: 150px;
-    max-height: 150px;
+    height: 150px;
     padding: 0;
-    margin: 5px;
-    flex-grow: 1;
     border: 1px solid #210761;
     transition: border 0.5s ease-in; }
     #albumShelf img:hover {
       border: 1px solid #e5ce4b; }
+  #albumShelf div {
+    flex-grow: 1;
+    padding: 5px;
+    display: flex;
+    justify-content: center; }
 
 .selectedAlbumCover {
   max-height: 150px;
