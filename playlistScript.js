@@ -129,8 +129,8 @@ var mjTracks = [
 ]
 */
 var playlist = []
-//runtime in seconds
-var totalRuntime = 0;
+//playlist runtime in seconds
+var runTime = 0;
 
 //get array of album objects
 fetch("https://lit-fortress-6467.herokuapp.com/object")
@@ -194,27 +194,47 @@ fetch("https://lit-fortress-6467.herokuapp.com/object")
 
             //add event listener for each track to add it to other bin when user selects it
             indivTrackEl.addEventListener("click", function(){
+
+              //add event listener to line item in chosen bin to remove on click
               var chosenIndivTrackEl = this .cloneNode(true)
+              chosenIndivTrackEl.addEventListener("click", function(){
+                //get runtime of track from class, convert to seconds, remove from total runtime
+                var trackRunTime = this.classList[0]
+                //runtime is in format mm:ss convert to seconds and subtract from runTime
+                var mins = trackRunTime.slice(0, trackRunTime.indexOf(":"))
+                var secs = trackRunTime.slice(trackRunTime.indexOf(":")+1, trackRunTime.length)
+                runTime = runTime - (parseInt(mins*60)+parseInt(secs))
+                //convert total to mm:ss and change runTime in html to match
+                var runTimeMin = `${Math.floor(runTime/60)} minutes ${(runTime%60)} seconds`
+                document.querySelector("#runtimeSpan").innerHTML = `runtime: ${runTimeMin}`
+
+                //remove track li from ol
+                this.parentNode.removeChild(this)
+              })
+              //add chosen track line item to ol in playlist bin
               chosenTracksListEl.appendChild(chosenIndivTrackEl)
               //get runtime of track from class, convert to seconds, add to total runtime
-              var runtime = this.classList[0]
-              //runtime is in format mm:ss convert to seconds and add to totalRuntime
-              var mins = runtime.slice(0, runtime.indexOf(":"))
-              var secs = runtime.slice(runtime.indexOf(":")+1, runtime.length)
-              totalRuntime += parseInt(mins*60)+parseInt(secs)
+              var trackRunTime = this.classList[0]
+              //runtime is in format mm:ss convert to seconds and add to runTime
+              var mins = trackRunTime.slice(0, trackRunTime.indexOf(":"))
+              var secs = trackRunTime.slice(trackRunTime.indexOf(":")+1, trackRunTime.length)
+              runTime += parseInt(mins*60)+parseInt(secs)
 
-              //convert total to mm:ss and change totalruntime in html to match
-              var totalRuntimeMin = `${Math.floor(totalRuntime/60)}:${(totalRuntime%60)}`
-              document.querySelector("#runtimeSpan").innerHTML = `runtime: ${totalRuntimeMin}`
-
+              //convert total to mm:ss and change runTime in html to match
+              var runTimeMin = `${Math.floor(runTime/60)} minutes ${(runTime%60)} seconds`
+              document.querySelector("#runtimeSpan").innerHTML = `runtime: ${runTimeMin}`
             })
-
-
-
-
-
-
           }
       })
     }
+  })
+
+  //event listener for clear tracks button removes all elements from chosen list and from playlist
+  var clearButtonEl = document.querySelector("#clearTracksBtn")
+  clearButtonEl.addEventListener("click", function(){
+    while(chosenTracksListEl.childNodes[0]){
+      chosenTracksListEl.removeChild(chosenTracksListEl.childNodes[0])
+    }
+    document.querySelector("#runtimeSpan").innerHTML = `runtime: 0`
+
   })

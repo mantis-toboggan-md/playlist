@@ -62,6 +62,9 @@ body {
   min-height: 95%; }
 
 #allTracks li:hover {
+  color: blue; }
+
+#chosenTracks li:hover {
   color: red; }
 
 #trackBins {
