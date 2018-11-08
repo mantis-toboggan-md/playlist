@@ -2,7 +2,10 @@ html {
   height: 100%; }
 
 body {
-  min-height: 100%; }
+  min-height: 100%;
+  background-color: #060113;
+  color: #968daa;
+  font-family: 'Rajdhani', sans-serif; }
 
 #mainContent {
   height: 100vh; }
@@ -36,7 +39,15 @@ body {
 #header {
   min-height: 10%;
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+  background-color: #120239; }
+
+.navbar-fixed-bottom {
+  background-color: #120239;
+  align-items: center; }
+
+#albumPreviews img {
+  border: 1px solid #210761; }
 
 #albumShelf {
   margin-left: 0;
@@ -49,23 +60,19 @@ body {
     max-width: 150px;
     max-height: 150px;
     padding: 0;
-    flex-grow: 1; }
+    margin: 5px;
+    flex-grow: 1;
+    border: 1px solid #210761;
+    transition: border 0.5s ease-in; }
+    #albumShelf img:hover {
+      border: 1px solid #e5ce4b; }
 
 .selectedAlbumCover {
-  max-height: 150px; }
+  max-height: 150px;
+  border: 1px solid #e5ce4b; }
 
 .col-sm-4 {
   height: 100%; }
-
-#allTracks, #chosenTracks {
-  border: 1px solid black;
-  min-height: 95%; }
-
-#allTracks li:hover {
-  color: blue; }
-
-#chosenTracks li:hover {
-  color: red; }
 
 #trackBins {
   margin-top: 5%;
@@ -77,5 +84,56 @@ body {
   justify-content: flex-end; }
   #inputArea button {
     margin-right: 10%; }
+
+#allTracks, #chosenTracks {
+  border: 1px solid black;
+  min-height: 95%;
+  background-color: #030321;
+  border: 1px solid black;
+  box-shadow: inset 0 0 30px 2px black; }
+
+#allTracks li, #chosenTracks li {
+  color: #968daa;
+  transition: color 0.75s ease-in; }
+
+#allTracks li:hover {
+  color: #e5ce4b;
+  transition: color 0.1s; }
+
+#chosenTracks li:hover {
+  color: #353438;
+  transition: color 0.1s; }
+
+@-moz-keyframes fadeIn {
+  from {
+    color: #e5ce4b; }
+  to {
+    color: #968daa; } }
+@-webkit-keyframes fadeIn {
+  from {
+    color: #e5ce4b; }
+  to {
+    color: #968daa; } }
+@keyframes fadeIn {
+  from {
+    color: #e5ce4b; }
+  to {
+    color: #968daa; } }
+#chosenTracks li {
+  -webkit-animation: fadeIn 1s;
+  -moz-animation: fadeIn 1s;
+  animation: fadeIn 1s; }
+
+.btn-primary, .btn-primary:focus {
+  background-image: none;
+  background-color: #210761;
+  border: none;
+  color: #e5ce4b;
+  transition: color 0.5s ease-in, background-color 0.5s ease-in; }
+
+.btn-primary:hover {
+  background-image: none;
+  background-color: #e5ce4b;
+  color: #210761; }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,8 +1,19 @@
+$backgroundColor: #060113;
+$textColor: #968daa;
+$addTextColor: #e5ce4b;
+$rmvTextColor: #353438;
+$binColor: #030321;
+$bannerBG: #120239;
+$btnColor: #210761;
+
 html{
   height: 100%;
 }
 body{
   min-height: 100%;
+  background-color: $backgroundColor;
+  color: $textColor;
+  font-family: 'Rajdhani', sans-serif;
 }
 #mainContent{
   height: 100vh;
@@ -41,8 +52,20 @@ body{
   min-height: 10%;
   display: flex;
   justify-content: center;
+  background-color: $bannerBG;
+}
+.navbar-fixed-bottom{
+  background-color: $bannerBG;
+  align-items: center;
 }
 
+#albumPreviews img {
+  border: 1px solid $btnColor;
+}
+
+
+
+//horizontal display of available albums
 #albumShelf{
   margin-left: 0;
   margin-right: 0;
@@ -54,31 +77,24 @@ body{
     max-width: 150px;
     max-height: 150px;
     padding: 0;
+    margin: 5px;
     flex-grow: 1;
+    border: 1px solid $btnColor;
+    transition: border 0.5s ease-in;
+    &:hover{
+      border: 1px solid $addTextColor;
+    }
   }
 }
 
 .selectedAlbumCover{
   max-height: 150px;
+  border: 1px solid $addTextColor;
 }
 
 //columns each containing bin and desc.
 .col-sm-4{
   height: 100%;
-}
-
-//bin elements
-#allTracks, #chosenTracks{
-  border: 1px solid black;
-  min-height: 95%;
-}
-
-#allTracks li:hover{
-  color: blue;
-}
-
-#chosenTracks li:hover{
-  color: red;
 }
 
 //row containing both bins and album preview info
@@ -95,4 +111,65 @@ body{
   & button{
     margin-right: 10%;
   }
+}
+
+//bin elements
+#allTracks, #chosenTracks{
+  border: 1px solid black;
+  min-height: 95%;
+  background-color: $binColor;
+  border: 1px solid black;
+  box-shadow: inset 0 0 30px 2px black;
+}
+
+
+//hover effects for song titles
+#allTracks li, #chosenTracks li{
+  color: $textColor;
+  transition: color 0.75s ease-in;
+}
+
+#allTracks li:hover{
+  color: $addTextColor;
+  transition: color 0.1s;
+}
+
+#chosenTracks li:hover{
+  color: $rmvTextColor;
+  transition: color 0.1s;
+}
+@-moz-keyframes fadeIn {
+    from {color:$addTextColor;}
+    to {color:$textColor;}
+}
+
+@-webkit-keyframes fadeIn {
+    from {color:$addTextColor;}
+    to {color:$textColor;}
+}
+
+@keyframes fadeIn {
+    from {color:$addTextColor;}
+    to {color:$textColor;}
+}
+
+#chosenTracks li {
+    -webkit-animation: fadeIn 1s;
+    -moz-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+.btn-primary, .btn-primary:focus{
+  //get rid of bootstrap "shape"
+  background-image: none;
+  background-color: $btnColor;
+  border: none;
+  color: $addTextColor;
+  transition: color 0.5s ease-in, background-color 0.5s ease-in;
+}
+
+.btn-primary:hover{
+  background-image:none;
+  background-color: $addTextColor;
+  color: $btnColor;
 }

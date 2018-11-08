@@ -233,28 +233,39 @@ fetch("https://lit-fortress-6467.herokuapp.com/object")
     while(chosenTracksListEl.childNodes[0]){
       chosenTracksListEl.removeChild(chosenTracksListEl.childNodes[0])
     }
-    document.querySelector("#runtimeSpan").innerHTML = `runtime: 0`
+    runTime = 0;
+    document.querySelector("#runtimeSpan").innerHTML = `runtime: `
 
   })
 
   //stop default submit behavior and use post request to send playlist
   document.querySelector("#submitBtn").addEventListener("click", function(event){
     event.preventDefault()
+    //clear old playlist values
+    playlist = [];
+    //iterate through each li of track names
     for(var i = 1; i < chosenTracksListEl.childNodes.length; i++){
       var trackSubmit = chosenTracksListEl.childNodes[i].innerText
       var title = trackSubmit.slice(0,trackSubmit.indexOf(":"))
       var length = trackSubmit.slice(trackSubmit.indexOf(":")+2, trackSubmit.length)
+      //could send this object to send track length and title
       var trackObj = {
         "track": title,
           "length": length
       }
+      //add titles to playlist array
       playlist.push(title)
     }
-    console.log(playlist)
     //send playlist with POST request and console log the response
     fetch('https://lit-fortress-6467.herokuapp.com/post', {
 	   method: 'post',
 	   body: JSON.stringify(playlist)
      })
-     .then((response)=>console.log("POST response: "+response))
+     .then((resource)=>resource.text())
+     .then(function(data){
+     console.log(data)
+     if(data[0] == "S"){
+       alert("Playlist submitted!")
+     }
+    })
   })
