@@ -118,11 +118,9 @@ var mjTracks = [
 
 /* format of playlist willbe:
 [
-  {album:
-  track:
+  {track:
   length:},
-  {album:
-  track:
+  {track:
   length:
   }
   ..etc
@@ -237,4 +235,26 @@ fetch("https://lit-fortress-6467.herokuapp.com/object")
     }
     document.querySelector("#runtimeSpan").innerHTML = `runtime: 0`
 
+  })
+
+  //stop default submit behavior and use post request to send playlist
+  document.querySelector("#submitBtn").addEventListener("click", function(event){
+    event.preventDefault()
+    for(var i = 1; i < chosenTracksListEl.childNodes.length; i++){
+      var trackSubmit = chosenTracksListEl.childNodes[i].innerText
+      var title = trackSubmit.slice(0,trackSubmit.indexOf(":"))
+      var length = trackSubmit.slice(trackSubmit.indexOf(":")+2, trackSubmit.length)
+      var trackObj = {
+        "track": title,
+          "length": length
+      }
+      playlist.push(title)
+    }
+    console.log(playlist)
+    //send playlist with POST request and console log the response
+    fetch('https://lit-fortress-6467.herokuapp.com/post', {
+	   method: 'post',
+	   body: JSON.stringify(playlist)
+     })
+     .then((response)=>console.log("POST response: "+response))
   })
